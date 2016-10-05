@@ -1,0 +1,28 @@
+def stock_picker(arr)
+ar=[]
+ar1=[]
+ar2=[]
+ar3=[]
+i=0
+len=arr.length
+ar=arr.sort
+index=arr.index(ar[len-1])
+if index==0
+index=arr.index(ar[len-2])
+end
+while i < index
+ar1[i] = arr[i]
+i+=1
+end
+ar1.sort!
+index1=arr.index(ar1[0])
+ar2[0] = arr[index1]
+ar2[1] = arr[index]
+index2=arr.index(ar2[0])
+index3=arr.index(ar2[1])
+ar3 << index2
+ar3 << index3
+print "#{ar3}"
+end
+stock_picker([17,3,6,9,15,8,6,1,10])
+#[1,4]
