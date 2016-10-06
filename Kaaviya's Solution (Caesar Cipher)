@@ -1,0 +1,82 @@
+def caesar_cipher(str1, num)
+
+hash = {}
+i = 1
+("a".."z").each do |x| 
+    hash[x] = i
+    i+=1 
+end
+hash[" "]=100
+hash["!"]=200
+
+
+hash2 = {}
+q = 1
+("A".."Z").each do |x| 
+    hash2[x] = q
+    q+=1 
+end
+hash2[" "]=100
+hash2["!"]=200
+
+
+hash1 = {}
+	i = 27
+	("a".."z").each do |x| 
+    hash1[x] = i
+    i+=1 
+	end
+	hash1[" "]=100
+	hash1["!"]=200
+	
+	
+	hash4 = {}
+	q = 27
+	("A".."Z").each do |x| 
+    hash4[x] = q
+    q+=1 
+end
+hash4[" "]=100
+hash4["!"]=200
+
+
+	w=str1.split(//)
+	w.each{|x|
+	k=x
+	c=k
+	j=0
+	if ("a".."z") === k
+	j=hash[k] + num.to_i
+	else
+	j=hash2[k] + num.to_i
+	end
+	
+	case j
+	when (1..26) 
+	if ("a".."z").include?k
+		hash.each{|z,y|
+		print z if y==j
+		}
+	else ("A".."Z").include?k
+	hash2.each{|z,y|
+	print z if y==j
+	}
+	end
+	when (27..52) 
+	if ("a".."z").include?k
+	hash1.each{|z,y|
+	print z if y==j
+	}
+	else ("A".."Z").include?k
+	hash4.each{|z,y|
+	print z if y==j
+	}
+	end
+	else
+	print c
+	end
+}
+end	
+
+caesar_cipher("What a string!", 5)
+#"Bmfy f xywnsl!"
