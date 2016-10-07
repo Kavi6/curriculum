@@ -1,0 +1,111 @@
+class TicTacToe
+@@p1_icon=" "
+@@p2_icon=" "
+@@board = {
+            "a1" => nil,
+            "a2" => nil,
+            "a3" => nil,
+            "b1" => nil,
+            "b2" => nil,
+            "b3" => nil,
+            "c1" => nil,
+            "c2" => nil,
+            "c3" => nil
+        }
+		
+def initialize(name1, name2)
+@player_1=name1
+@player_2=name2
+end
+
+def display
+puts "#{@@board["a1"]} | #{@@board["a2"]} | #{@@board["a3"]}"
+puts "---------"
+puts "#{@@board["b1"]} | #{@@board["b2"]} | #{@@board["b3"]}"
+puts "---------"
+print "#{@@board["c1"]} | #{@@board["c2"]} | #{@@board["c3"]}"
+puts " "
+puts " "
+end
+
+def condition
+if ((@@board["a1"]==@@p1_icon) && (@@board["a2"]==@@p1_icon) && (@@board["a3"]==@@p1_icon)) || 
+((@@board["a1"]==@@p2_icon) && (@@board["a2"]==@@p2_icon) && (@@board["a3"]==@@p2_icon)) || 
+((@@board["b1"]==@@p2_icon) && (@@board["b2"]==@@p2_icon) && (@@board["b3"]==@@p2_icon)) || 
+((@@board["b1"]==@@p1_icon) && (@@board["b2"]==@@p1_icon) && (@@board["b3"]==@@p1_icon)) || 
+((@@board["c1"]==@@p2_icon) && (@@board["c2"]==@@p2_icon) && (@@board["c3"]==@@p2_icon)) || 
+((@@board["c1"]==@@p1_icon) && (@@board["c2"]==@@p1_icon) && (@@board["c3"]==@@p1_icon)) || 
+((@@board["a1"]==@@p1_icon) && (@@board["b1"]==@@p1_icon) && (@@board["c1"]==@@p1_icon)) ||
+((@@board["a1"]==@@p2_icon) && (@@board["b1"]==@@p2_icon) && (@@board["c1"]==@@p2_icon)) ||
+((@@board["a2"]==@@p1_icon) && (@@board["b2"]==@@p1_icon) && (@@board["c2"]==@@p1_icon)) ||
+((@@board["a2"]==@@p2_icon) && (@@board["b2"]==@@p2_icon) && (@@board["c2"]==@@p2_icon)) ||
+((@@board["a3"]==@@p1_icon) && (@@board["b3"]==@@p1_icon) && (@@board["c3"]==@@p1_icon)) ||
+((@@board["a3"]==@@p2_icon) && (@@board["b3"]==@@p2_icon) && (@@board["c3"]==@@p2_icon)) ||
+((@@board["a1"]==@@p1_icon) && (@@board["b2"]==@@p1_icon) && (@@board["c3"]==@@p1_icon)) ||
+((@@board["a1"]==@@p2_icon) && (@@board["b2"]==@@p2_icon) && (@@board["c3"]==@@p2_icon)) ||
+((@@board["a3"]==@@p1_icon) && (@@board["b2"]==@@p1_icon) && (@@board["c1"]==@@p1_icon)) ||
+((@@board["a3"]==@@p2_icon) && (@@board["b2"]==@@p2_icon) && (@@board["c1"]==@@p2_icon))
+return false
+else 
+return true
+end
+end
+
+def start(icon_1, icon_2)
+@@p1_icon=icon_1
+@@p2_icon=icon_2
+turn=@player_1
+icon=@@p1_icon
+puts "Lets Start!! It's your turn #{@player_1}"
+puts " "
+puts "Enter the place where you going to start (it's a 3X3 matrix board with a1, a2, a3, b1, b2, b3, c1, c2, c3)"
+puts " "
+input=gets.chomp.to_s
+@@board[input]||=icon
+puts " "
+display
+while condition
+if turn==@player_1 
+puts "#{@player_2}! Now it's your turn " 
+puts " "
+turn=@player_2
+icon=@@p2_icon 
+else
+puts "#{@player_1}! Now it's your turn "
+puts " "
+turn=@player_1
+icon=@@p1_icon
+end
+puts "Enter the place where you going to place your icon (a1, a2, a3, b1, b2, b3, c1, c2, c3)"
+puts " "
+input=gets.chomp.to_s
+puts " "
+if @@board[input]==nil
+@@board[input]||=icon
+else
+puts "It is a place where icon already exists. \nLook the board display and choose empty location to place your icon"
+puts " "
+input=gets.chomp.to_s
+@@board[input]||=icon
+end
+puts " "
+display
+end
+puts icon==@@p2_icon ? "#{@player_2} won the game" : "#{@player_1} won the game"
+end
+
+end
+puts "Player 1: Enter your name "
+name1=gets.chomp.to_s
+puts " "
+puts "Player 2: Enter your name "
+name2=gets.chomp.to_s
+puts " "
+game=TicTacToe.new(name1, name2)
+game.display
+puts "#{name1}: Choose your icon"
+icon1=gets.chomp.to_s
+puts "#{name2}: Choose your icon"
+icon2=gets.chomp.to_s
+puts " "
+game.start(icon1, icon2)
